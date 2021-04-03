@@ -4,6 +4,7 @@ defmodule Identicon do
     |> hash_input
     |> pick_color
     |> make_grid
+    |> filter_odd
   end
 
   def hash_input(input) do
@@ -18,4 +19,26 @@ defmodule Identicon do
     %Identicon.Image{image | color: {r, g, b}}
   end
 
+  def make_grid(%Identicon.Image{hex: hex} = image) do
+    grid =
+      hex
+      |> Enum.chunk_every(3, 3, :discard)
+      |> Enum.map(&mirror_row/1)
+      |> List.flatten()
+      |> Enum.with_index()
+
+    %Identicon.Image{image | grid: grid}
+  end
+
+  def mirror_row(row) do
+    [first, second | _tail] = row
+    row ++ [second, first]
+  end
+
+  def filter_odd(%Identicon.Image{grid: grid} = image) do
+   grid = Enum.filter grid, fn({code, _index}) -> 
+      rem(code, 2) == 0
+    end
+    %Identicon.Image{image | grid: grid}
+  end
 end
