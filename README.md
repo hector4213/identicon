@@ -1,7 +1,7 @@
 # Identicon
 
  <p align="center">
- <img src='/README/examnple.png' width='370'>
+ <img src='/README/example.png'>
  </p>
 
 ## Whats an Identicon?
@@ -36,7 +36,7 @@ iex(1)> Identicon.main("myghusername")
 
 ```
 
-An Identicon will be generated in the root folder.
+**An Identicon will be generated in the root folder.**
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `identicon` to your list of dependencies in `mix.exs`:
